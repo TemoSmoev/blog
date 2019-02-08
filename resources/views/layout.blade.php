@@ -51,7 +51,7 @@
 
                 <ul class="nav navbar-nav text-uppercase pull-right">
                     @if (Auth::check())
-                        <li><a href="contact.html">My profile</a></li>
+                        <li><a href="/profile">My profile</a></li>
                         <li><a href="/logout">Logout</a></li>
                     @else
                         <li><a href="/register">Register</a></li>
@@ -75,6 +75,13 @@
     <!-- /.container-fluid -->
 </nav>
 
+@include('admin.errors')
+
+@if (session('status'))
+    <div class="alert alert-info">
+        {{ session('status') }}
+    </div>    
+@endif
 
 @yield('content')
 <!--footer start-->

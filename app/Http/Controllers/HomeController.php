@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Tag;
 use App\Category;
+use App\Comment;
 
 class HomeController extends Controller
 {
@@ -13,17 +14,12 @@ class HomeController extends Controller
     {
         $posts=Post::paginate(3);
         
-        $popularPosts=Post::orderBy('views','desc')->take(3)->get();
-        $featuredPosts=Post::where('is_featured','1')->take(3)->get();
-        $recentPosts=Post::orderBy('date','desc')->take(4)->get();
-        $categories=Category::all();
-
         return view('pages.index',compact('posts','popularPosts','featuredPosts','recentPosts','categories'));
     }
     public function show($slug)
     {
         $post=Post::where('slug',$slug)->FirstOrFail();
-        // dd($post);
+
         return view('pages.show',compact('post'));
     }
     public function tag($slug)
